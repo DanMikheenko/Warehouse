@@ -33,6 +33,13 @@ namespace Warehouse.UI
                 new Product {Title="Elite x3", Company="HP", Price=56000 },
                 new Product {Title="Mi5S", Company="Xiaomi", Price=35000 }
             };
+
+            //Add items to the DB
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Products.AddRange(Products);
+                db.SaveChanges();
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

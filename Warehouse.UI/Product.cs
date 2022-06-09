@@ -14,6 +14,7 @@ namespace Warehouse.UI
         private string company;
         private int price;
 
+        public int Id { get; set; }
         public string Title
         {
             get { return title; }
