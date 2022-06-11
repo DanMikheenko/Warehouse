@@ -10,14 +10,14 @@ namespace Warehouse.UI
     internal class ApplicationContext:DbContext
     {
         public DbSet<Product> Products { get; set; }
-        //public ApplicationContext()
-        //{
-        //    Database.EnsureCreated();
-        //}
+        public ApplicationContext()
+        {
+            Database.EnsureCreated();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5433;Database=usersdb2;Username=postgres;Password=password");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=887951");
         }
     }
 }

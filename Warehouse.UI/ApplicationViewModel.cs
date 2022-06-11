@@ -34,12 +34,18 @@ namespace Warehouse.UI
                 new Product {Title="Mi5S", Company="Xiaomi", Price=35000 }
             };
 
-            //Add items to the DB
-            using (ApplicationContext db = new ApplicationContext())
+            var productRepository = new ProductRepository();
+            foreach (var product in Products)
             {
-                db.Products.AddRange(Products);
-                db.SaveChanges();
+                productRepository.Add(product);
             }
+
+            //Add items to the DB
+            //using (ApplicationContext db = new ApplicationContext())
+            //{
+            //    db.Products.AddRange(Products);
+            //    db.SaveChanges();
+            //}
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
