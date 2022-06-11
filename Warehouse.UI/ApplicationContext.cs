@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Warehouse.UI
 {
@@ -17,7 +18,16 @@ namespace Warehouse.UI
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=887951");
+            XmlDocument doc = new XmlDocument();
+            doc.Load("Config.xml");
+            string connectionString = "";
+            foreach (XmlNode node in doc.ChildNodes)
+            {
+                if (node.Name == "ConnectionString")
+                    connectionString = node.InnerText;
+            }
+
+            optionsBuilder.UseNpgsql(connectionString);
         }
     }
 }

@@ -1,0 +1,2 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ConnectionString>Host=localhost;Port=5432;Database=postgres;Username=postgres;Password=887951</ConnectionString>
