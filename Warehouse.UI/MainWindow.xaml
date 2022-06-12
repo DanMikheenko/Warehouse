@@ -19,7 +19,20 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="0.8*" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.1*" />
+        </Grid.RowDefinitions>
 
+        <!--<DataGrid Grid.Column="0" x:Name="productsGrid" AutoGenerateColumns="True" ItemsSource="{DynamicResource ResourceKey=products}">
+            <DataGrid.Resources>
+                <col:ArrayList x:Key="products">
+                    <local:Phone Title="iPhone 6S" Company="Apple" Price="54990" />
+                    <local:Phone Title="Lumia 950" Company="Microsoft" Price="39990" />
+                    <local:Phone Title="Nexus 5X" Company="Google" Price="29990" />
+                </col:ArrayList>
+            </DataGrid.Resources>
+        </DataGrid>-->
         <ListBox Grid.Column="0" ItemsSource="{Binding Products}"
                  SelectedItem="{Binding SelectedProduct}">
             <ListBox.ItemTemplate>
@@ -32,6 +45,9 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Command="{Binding AddCommand}">Добавить</Button>
+        </StackPanel>
 
         <StackPanel Grid.Column="1" DataContext="{Binding SelectedProduct}">
             <TextBlock Text="Выбранный элемент"  />

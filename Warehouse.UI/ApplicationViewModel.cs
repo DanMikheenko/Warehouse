@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Warehouse.UI.Base;
 
 namespace Warehouse.UI
 {
@@ -26,26 +27,25 @@ namespace Warehouse.UI
 
         public ApplicationViewModel()
         {
-            Products = new ObservableCollection<Product>
-            {
-                new Product { Title="iPhone 7", Company="Apple", Price=56000 },
-                new Product {Title="Galaxy S7 Edge", Company="Samsung", Price =60000 },
-                new Product {Title="Elite x3", Company="HP", Price=56000 },
-                new Product {Title="Mi5S", Company="Xiaomi", Price=35000 }
-            };
-
+            
             var productRepository = new ProductRepository();
-            foreach (var product in Products)
+            Products = productRepository.GetAll();
+        }
+        private RelayCommand addCommand;
+        public RelayCommand AddCommand
+        {
+            get
             {
-                productRepository.Add(product);
+                return addCommand ??
+                  (addCommand = new RelayCommand(obj =>
+                  {
+                      Product product = new Product();
+                      Products.Insert(0, product);
+                      SelectedProduct = product;
+                      var productRepository = new ProductRepository();
+                      productRepository.Add(product);
+                  }));
             }
-
-            //Add items to the DB
-            //using (ApplicationContext db = new ApplicationContext())
-            //{
-            //    db.Products.AddRange(Products);
-            //    db.SaveChanges();
-            //}
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,18 @@ namespace Warehouse.UI
 
                 context.SaveChanges();
             }
+        }
+
+        public ObservableCollection<Product> GetAll()
+        {
+            var productCollection = new ObservableCollection<Product>();
+
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                productCollection = new ObservableCollection<Product>(db.Products);
+            }
+
+            return productCollection;
         }
 
     }
